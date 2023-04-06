@@ -13,8 +13,7 @@
         },
         {
             "name": "Antoine Mineau",
-            "email": "antoine.mineau@gmail.com",
-            "homepage": ""
+            "email": "antoine.mineau@gmail.com"
         }
     ],
     "minimum-stability": "stable",
