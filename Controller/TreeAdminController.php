@@ -3,16 +3,19 @@
 namespace RedCode\TreeBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
 class TreeAdminController extends CRUDController
 {
-    public function listAction()
+    public function listAction(Request $request): Response
     {
-        $request = $this->getRequest();
         if ($listMode = $request->get('_list_mode')) {
             $this->admin->setListMode($listMode);
         }
@@ -26,28 +29,25 @@ class TreeAdminController extends CRUDController
                 return $preResponse;
             }
 
-            return $this->render(
-                'RedCodeTreeBundle:CRUD:tree.html.twig',
+            return $this->renderWithExtraParams(
+                '@RedCodeTree/CRUD/tree.html.twig',
                 [
                     'action' => 'list',
                     'csrf_token' => $this->getCsrfToken('sonata.batch'),
                     '_sonata_admin' => $request->get('_sonata_admin'),
-                ],
-                null,
-                $request
+                ]
             );
         }
 
-        return parent::listAction();
+        return parent::listAction($request);
     }
 
-    public function treeDataAction()
-    {
-        $request = $this->getRequest();
-        
-        $doctrine = $this->get('doctrine');
+    public function treeDataAction(
+        Request $request,
+        EntityManagerInterface $em
+    ) {
         /** @var EntityManager $em */
-        $em = $doctrine->getManagerForClass($this->admin->getClass());
+        //$em = $this->container->get('doctrine.orm.entity_manager');
         /** @var NestedTreeRepository $repo */
         $repo = $em->getRepository($this->admin->getClass());
 
