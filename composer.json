@@ -1,5 +1,5 @@
 {
-    "name": "redcode/tree-bundle",
+    "name": "antoinemineau/tree-bundle",
     "type": "symfony-bundle",
     "description": "This Symfony bundle integrates jsTree and Gedmo Nested Set directly to Sonata Admin",
     "keywords": ["ajax", "asynchronous", "async", "tree", "nested", "set", "bundle", "symfony", "bundle", "doctrine", "sonataproject"],
@@ -10,7 +10,12 @@
             "name": "Andrew Reddikh",
             "email": "andrew@reddikh.com",
             "homepage": "http://reddikh.com"
-    	}
+        },
+        {
+            "name": "Antoine Mineau",
+            "email": "antoine.mineau@gmail.com",
+            "homepage": ""
+        }
     ],
     "minimum-stability": "stable",
     "require": {
