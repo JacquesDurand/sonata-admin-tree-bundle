@@ -112,12 +112,16 @@
     {% include '@RedCodeTree/CRUD/modal_edit_association_script.html.twig' with {'id' : 'tree', 'admin' : admin} %}
 {% endblock %}
 
+
+{%- block actions -%}
+    {% include '@SonataAdmin/CRUD/action_buttons.html.twig' %}
+{%- endblock -%}
+
 {% block list_filters_actions %}
     &nbsp;
 {% endblock %}
 
 {% block list_filters %}
-
 {% endblock %}
 
 {%- block tab_menu -%}
@@ -126,3 +130,11 @@
         'template': get_global_template('tab_menu_template')
     }, 'twig') }}
 {%- endblock -%}
+
+{% block title %}
+    {{ admin.isChild and admin.parent.subject ? 'title_edit'|trans({'%name%': admin.parent.toString(admin.parent.subject) }, 'SonataAdminBundle') : '' }}
+{% endblock %}
+
+{% block navbar_title %}
+    {{ admin.isChild and admin.parent.subject ? 'title_edit'|trans({'%name%': admin.parent.toString(admin.parent.subject) }, 'SonataAdminBundle') : '' }}
+{% endblock %}
