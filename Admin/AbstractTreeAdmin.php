@@ -2,7 +2,7 @@
 
 namespace RedCode\TreeBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
+use App\Admin\AbstractAdmin;
 
 class AbstractTreeAdmin extends AbstractAdmin
 {
