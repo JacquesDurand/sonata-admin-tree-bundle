@@ -2,6 +2,7 @@
 
 namespace RedCode\TreeBundle\Controller;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
@@ -51,6 +52,10 @@ class TreeAdminController extends CRUDController
         /** @var NestedTreeRepository $repo */
         $repo = $em->getRepository($this->admin->getClass());
 
+        $brandId = $request
+            ->getSession()
+            ->get(User::SESSION_ADMIN_BRAND_ID_SELECTED);
+
         $operation = $request->get('operation');
         switch ($operation) {
             case 'get_node':
@@ -59,7 +64,17 @@ class TreeAdminController extends CRUDController
                     $parentNode = $repo->find($nodeId);
                     $nodes = $repo->getChildren($parentNode, true);
                 } else {
-                    $nodes = $repo->getRootNodes();
+                    if ($brandId !== null) {
+                        $nodes = $repo
+                            ->getRootNodesQueryBuilder()
+                            ->join('node.brand', 'b')
+                            ->andWhere('b.id = :brand')
+                            ->setParameter('brand', $brandId)
+                            ->getQuery()
+                            ->getResult();
+                    } else {
+                        $nodes = $repo->getRootNodes();
+                    }
                 }
 
                 $nodes = array_map(
