@@ -13,7 +13,6 @@ class AbstractTreeAdmin extends AbstractAdmin
 
     public function __construct($code, $class, $baseControllerName, $treeTextField)
     {
-        parent::__construct($code, $class, $baseControllerName);
         $this->listModes['tree'] = [
             'class' => 'fa fa-tree fa-fw',
         ];
