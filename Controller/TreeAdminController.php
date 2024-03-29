@@ -3,6 +3,7 @@
 namespace RedCode\TreeBundle\Controller;
 
 use App\Entity\User;
+use App\Entity\Retail;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
@@ -63,6 +64,9 @@ class TreeAdminController extends CRUDController
                 if ($nodeId) {
                     $parentNode = $repo->find($nodeId);
                     $nodes = $repo->getChildren($parentNode, true);
+                    if (!count($nodes)) {
+                        $nodes = $parentNode->getRetails()->toArray();
+                    }
                 } else {
                     if ($brandId !== null) {
                         $nodes = $repo
@@ -79,6 +83,14 @@ class TreeAdminController extends CRUDController
 
                 $nodes = array_map(
                     function ($node) {
+                        if ($node instanceof Retail) {
+                            return [
+                                'id' => $node->getId(),
+                                'text' => (string) $node,
+                                'children' => true,
+                                'icon' => 'fa fa-store-alt'
+                            ];
+                        }
                         return [
                             'id' => $node->getId(),
                             'text' => (string) $node,
