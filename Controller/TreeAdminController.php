@@ -64,8 +64,8 @@ class TreeAdminController extends CRUDController
                 if ($nodeId) {
                     $parentNode = $repo->find($nodeId);
                     $nodes = $repo->getChildren($parentNode, true);
-                    if (!count($nodes)) {
-                        $nodes = $parentNode->getRetails()->toArray();
+                    if (0 < $parentNode->getRetails()->count()) {
+                        $nodes = array_merge($nodes, $parentNode->getRetails()->toArray());
                     }
                 } else {
                     if ($brandId !== null) {

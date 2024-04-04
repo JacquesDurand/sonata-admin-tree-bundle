@@ -13,10 +13,6 @@ class AbstractTreeAdmin extends AbstractAdmin
 
     public function __construct($code, $class, $baseControllerName, $treeTextField)
     {
-        $this->listModes['tree'] = [
-            'class' => 'fa fa-tree fa-fw',
-        ];
-
         if (empty($treeTextField)) {
             throw new \UnexpectedValueException('It\'s required to specify \'treeTextField\' for tree view');
         }
