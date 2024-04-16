@@ -85,9 +85,9 @@ class TreeAdminController extends CRUDController
                     function ($node) {
                         if ($node instanceof Retail) {
                             return [
-                                'id' => $node->getId(),
+                                'retailId' => $node->getId(),
                                 'text' => (string) $node,
-                                'children' => true,
+                                'children' => false,
                                 'icon' => 'fa fa-store-alt'
                             ];
                         }

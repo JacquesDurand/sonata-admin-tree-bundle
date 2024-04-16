@@ -41,7 +41,7 @@
                                         action: function(menu, data) {
                                             var tree = $('#jstree_div').jstree(true);
                                             var selectedNodes = tree.get_selected(true);
-                                            var id = selectedNodes[0].id
+                                            var id = selectedNodes[0].retailId;
                                             var editUrl = '{{ path('admin_app_retail_edit', {'id': '{id}'}) }}'.replace(encodeURI('{id}'), id);
 
                                             return start_field_dialog_form_edit_tree(editUrl, $('#jstree_div'));
@@ -54,7 +54,7 @@
                                     action: function(menu, data) {
                                         var tree = $('#jstree_div').jstree(true);
                                         var selectedNodes = tree.get_selected(true);
-                                        var id = selectedNodes[0].id
+                                        var id = selectedNodes[0].id;
                                         var editUrl = '{{ admin.generateUrl('edit', {'id': '{id}'}) }}'.replace(encodeURI('{id}'), id);
 
                                         return start_field_dialog_form_edit_tree(editUrl, $('#jstree_div'));
