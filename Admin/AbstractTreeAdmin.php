@@ -2,7 +2,7 @@
 
 namespace RedCode\TreeBundle\Admin;
 
-use App\Admin\AbstractAdmin;
+use App\Domain\Main\Admin\AbstractAdmin;
 
 class AbstractTreeAdmin extends AbstractAdmin
 {
